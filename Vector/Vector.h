@@ -9,6 +9,7 @@ class Vector {
 private:
     std::size_t size_;
     T* data;
+    const T epsilon = 1e-6;
 
 public:
     Vector(std::size_t size, T value);
@@ -152,7 +153,7 @@ inline T Vector<T>::operator*(const Vector<T>& other) const {
 
 template <typename T>
 inline bool Vector<T>::operator==(const Vector<T>& other) const {
-    if (size_ != other.size_) {
+    if (std::abs(data[i] - other[i]) > epsilon) {
         return false;
     }
 
