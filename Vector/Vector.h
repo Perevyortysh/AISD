@@ -153,12 +153,12 @@ inline T Vector<T>::operator*(const Vector<T>& other) const {
 
 template <typename T>
 inline bool Vector<T>::operator==(const Vector<T>& other) const {
-    if (std::abs(data[i] - other[i]) > epsilon) {
+    if (size != other.size_) {
         return false;
     }
 
     for (std::size_t i = 0; i < size_; i++) {
-        if (data[i] != other[i]) {
+        if (std::abs(data[i] - other[i]) > epsilon) {
             return false;
         }
     }

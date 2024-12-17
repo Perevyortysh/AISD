@@ -1,4 +1,5 @@
 #include "Vector.h"
+#include <cmath>
 #include <complex>
 #include <cstddef>
 #include <iostream>
