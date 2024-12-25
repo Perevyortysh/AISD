@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 #include <complex>
 #include <cstddef>
 #include <random>
@@ -34,7 +35,8 @@ public:
     std::size_t size() const { return size_; }
 
     T length() const;
-    T cosOfAngleWith(const Vector<T>& other) const;
+    T sinOfAngleWith(const Vector<T>& other) const;
+    T areaTriangle(const Vector<T>& other) const;
 
 private:
     void fillWithRandomNumbers(float low, float high);
@@ -178,13 +180,21 @@ inline T Vector<T>::length() const {
 }
 
 template <typename T>
-inline T Vector<T>::cosOfAngleWith(const Vector<T>& other) const {
+inline T Vector<T>::sinOfAngleWith(const Vector<T>& other) const {
     if (size_ != other.size_) {
         throw std::invalid_argument("Vectors must have the same size.");
     }
     static_assert(std::is_arithmetic<T>::value, "Angle can only be calculated with numeric types ");
 
-    return (*this * other) / (length() * other.length());
+    return std::sqrt(1 - std::pow((*this * other) / (length() * other.length()), 2));
+}
+
+template <typename T>
+inline T Vector<T>::areaTriangle(const Vector<T>& other) const {
+    static_assert(std::is_arithmetic<T>::value, "Area of the triangle can only be calculated with numeric types ");
+
+    T sinAngle = sinOfAngleWith(other);
+    return 0.5 * length() * other.length() * sinAngle;
 }
 
 template <typename T>

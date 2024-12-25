@@ -18,4 +18,9 @@ int main() {
     //for (std::size_t i = 0; i < v.size(); i++) {
     //    std::cout << v[i] << std::endl;
     //}
+
+    Vector<float> v1(2, 1.0f);
+    Vector<float> v2(2, 1.0f);
+    v1[1] = 0;
+    std::cout << v1.areaTriangle(v2) << std::endl;
 }
